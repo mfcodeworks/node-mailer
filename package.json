@@ -5,7 +5,7 @@
     "start": "npm run build && node index.local.js",
     "build": "npm run compile && npm run lambda",
     "compile": "tsc",
-    "lambda": "netlify-lambda serve build"
+    "lambda": "netlify-lambda build build"
   },
   "author": "MF Codeworks <arranjamesfletcher2012@gmail.com>",
   "devDependencies": {
