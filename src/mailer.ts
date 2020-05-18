@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import serverless from 'serverless-http';
 import nodemailer from 'nodemailer';
 
@@ -29,6 +30,7 @@ router.post('/sendMail', async (req, res) => {
     }
 });
 
+app.use(cors());
 app.use(express.json());
 app.use('/.netlify/functions/mailer', router);
 
