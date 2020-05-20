@@ -11,7 +11,7 @@ const options = {
         user: process.env.MAILER_USER,
         pass: process.env.MAILER_PASS
     }
-}
+};
 const transporter = nodemailer.createTransport(options as any);
 
 export const app = express();
@@ -30,9 +30,7 @@ router.post('/sendMail', async (req, res) => {
     }
 });
 
-app.use(cors({
-    origin: 'https://*.mfcodeworks.com'
-}));
+app.use(cors({origin: /((.*)\.)?(mfcodeworks\.com)$/}));
 app.use(express.json());
 app.use('/.netlify/functions/mailer', router);
 
