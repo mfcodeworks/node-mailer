@@ -8,16 +8,17 @@
     "lambda": "netlify-lambda build build"
   },
   "author": "MF Codeworks <arranjamesfletcher2012@gmail.com>",
-  "devDependencies": {
-    "@types/cors": "^2.8.6",
-    "@types/express": "^4.17.6",
-    "@types/nodemailer": "^6.4.0",
+  "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "netlify-lambda": "^1.6.3",
     "nodemailer": "^6.4.6",
-    "serverless-http": "^2.4.1",
-    "typescript": "^3.9.2"
+    "serverless-http": "^2.4.1"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "@types/nodemailer": "^6.4.0",
+    "typescript": "^3.9.2"
+  }
 }

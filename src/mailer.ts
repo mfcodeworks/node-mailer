@@ -30,7 +30,7 @@ router.post('/sendMail', async (req, res) => {
     }
 });
 
-app.use(cors({origin: /((.*)\.)?(mfcodeworks\.com)$/}));
+app.use(cors({origin: /^((.*)\.)?(mfcodeworks\.com)$/}));
 app.use(express.json());
 app.use('/.netlify/functions/mailer', router);
 
