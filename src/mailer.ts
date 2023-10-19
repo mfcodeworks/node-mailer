@@ -34,11 +34,9 @@ router.post('/sendMail', async (req, res) => {
 });
 
 router.use('/.netlify/functions/mailer', router);
-app.use(cors({origin: /^((.*)\.)?(mfcodeworks\.com)$/}));
+const corsCheck = cors()
+app.use(corsCheck);
 app.use(express.json());
 app.use(router)
 
 export const handler = serverless(app);
-// module.exports.funcName = async (context: any, req: Request) => {
-//     context.res = await handler(context, req);
-// }
