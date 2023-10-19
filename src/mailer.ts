@@ -34,8 +34,8 @@ router.post('/sendMail', async (req, res) => {
 });
 
 router.use('/.netlify/functions/mailer', router);
-app.use(router);
 app.use(cors());
 app.use(express.json());
+app.use(router)
 
 export const handler = serverless(app);
