@@ -34,11 +34,11 @@ router.post('/sendMail', async (req, res) => {
 });
 
 router.use('/.netlify/functions/mailer', router);
-// app.use(cors({origin: /^((.*)\.)?(mfcodeworks\.com)$/}));
+app.use(cors({origin: /^((.*)\.)?(mfcodeworks\.com)$/}));
 app.use(express.json());
 app.use(router)
 
-const handler = serverless(app);
-module.exports.funcName = async (context: any, req: Request) => {
-    context.res = await handler(context, req);
-}
+export const handler = serverless(app);
+// module.exports.funcName = async (context: any, req: Request) => {
+//     context.res = await handler(context, req);
+// }
