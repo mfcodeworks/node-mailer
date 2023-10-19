@@ -14,7 +14,7 @@ const options: SMTPTransport | SMTPTransport.Options = {
         pass: process.env.MAILER_PASS
     }
 };
-const transporter = nodemailer.createTransport(options as any);
+const transporter = nodemailer.createTransport(options);
 
 export const app = express();
 const router = express.Router();
@@ -34,9 +34,8 @@ router.post('/sendMail', async (req, res) => {
 });
 
 router.use('/.netlify/functions/mailer', router);
-const corsCheck = cors()
-app.use(corsCheck);
+app.use(router);
+app.use(cors());
 app.use(express.json());
-app.use(router)
 
 export const handler = serverless(app);
