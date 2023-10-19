@@ -5,20 +5,21 @@
     "start": "npm run build && node index.local.js",
     "build": "npm run compile && npm run lambda",
     "compile": "tsc",
-    "lambda": "netlify-lambda build build"
+    "lambda": "NODE_OPTIONS=--openssl-legacy-provider netlify-lambda build build"
   },
   "author": "MF Codeworks <arranjamesfletcher2012@gmail.com>",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.17.1",
-    "netlify-lambda": "^1.6.3",
+    "netlify-lambda": "^2.0.16",
     "nodemailer": "^6.4.6",
-    "serverless-http": "^2.4.1"
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
     "@types/nodemailer": "^6.4.0",
-    "typescript": "^3.9.2"
+    "typescript": "^5.2.2"
   }
 }

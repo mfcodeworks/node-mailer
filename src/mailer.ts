@@ -1,12 +1,14 @@
-import express from 'express';
+import express, { Request } from 'express';
 import cors from 'cors';
 import serverless from 'serverless-http';
 import nodemailer from 'nodemailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
-const options = {
+const options: SMTPTransport | SMTPTransport.Options = {
     host: process.env.MAILER_HOST || '',
-    port: process.env.MAILER_PORT || '',
-    secure: process.env.MAILER_SECURE || '',
+    port: parseInt(process.env.MAILER_PORT || '465'),
+    name: process.env.MAILER_NAME || '',
+    secure: process.env.MAILER_SECURE === 'true' || true,
     auth: {
         user: process.env.MAILER_USER,
         pass: process.env.MAILER_PASS
@@ -22,6 +24,7 @@ router.post('/sendMail', async (req, res) => {
     const {from, to, subject, text, replyTo} = req.body;
 
     try {
+        console.log('Sending mail', {from, to, subject, text, replyTo});
         const mailer = await transporter.sendMail({from, to, subject, text, replyTo});
         console.log(mailer);
         res.status(202).send();
@@ -30,8 +33,12 @@ router.post('/sendMail', async (req, res) => {
     }
 });
 
-app.use(cors({origin: /^((.*)\.)?(mfcodeworks\.com)$/}));
+router.use('/.netlify/functions/mailer', router);
+// app.use(cors({origin: /^((.*)\.)?(mfcodeworks\.com)$/}));
 app.use(express.json());
-app.use('/.netlify/functions/mailer', router);
+app.use(router)
 
-export const handler = serverless(app);
+const handler = serverless(app);
+module.exports.funcName = async (context: any, req: Request) => {
+    context.res = await handler(context, req);
+}
